@@ -3,9 +3,9 @@ ref: fortinet
 name: fortinet
 description: Fortinet Firewall
 keywords: 
-    - firewalls
-    - threat
-    - security
+  - firewalls
+  - threat
+  - security
 version: 0.0.3
 author: StackStorm, Inc.
 email: info@stackstorm.com

@@ -23,10 +23,10 @@ jobs:
           name: Download dependencies
           command: |
             git clone -b master git://github.com/stackstorm-exchange/ci.git ~/ci
-            ~/ci/.circle/dependencies
+            ~/ci/.circle/dependencies ; ~/ci/.circle/exit_on_py2_checks $?
       - run:
           name: Run tests (Python 2.7)
-          command: ~/ci/.circle/test
+          command: ~/ci/.circle/test ; ~/ci/.circle/exit_on_py2_checks $?
       - save_cache:
           key: v1-dependency-cache-py27-{{ checksum "requirements.txt" }}
           paths:
@@ -73,7 +73,7 @@ jobs:
           shell: /bin/bash
           command: |
             git clone -b master git://github.com/stackstorm-exchange/ci.git ~/ci
-            ~/ci/.circle/dependencies ; ~/ci/.circle/exit_on_py3_checks $?
+            ~/ci/.circle/dependencies
       - run:
           name: Run tests (Python 3.6)
           # NOTE: We don't want to use default "-e" option because this means
@@ -81,7 +81,7 @@ jobs:
           # can't intercept the error and cause non-fatal exit in case pack
           # doesn't declare support for Python 3
           shell: /bin/bash
-          command: ~/ci/.circle/test ; ~/ci/.circle/exit_on_py3_checks $?
+          command: ~/ci/.circle/test
       - save_cache:
           key: v1-dependency-cache-py36-{{ checksum "requirements.txt" }}
           paths:
@@ -119,7 +119,7 @@ workflows:
       - build_and_test_python36
       - deploy:
           requires:
-            - build_and_test_python27
+            - build_and_test_python36
           filters:
             branches:
               only: master

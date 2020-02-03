@@ -1,8 +1,11 @@
 # Fortinet Integration Pack
+
 This pack allows you to integrate with
 [Fortinet NGFW](https://www.fortinet.com/products/next-generation-firewall.html).
 
 Here a [demo Fortinet NGFW](https://fortigate.fortidemo.com) provided by Fortinet to try.
+
+**This pack is Python 3 ONLY!**
 
 ## Configuration
 Copy the example configuration in [fortinet.yaml.example](./fortinet.yaml.example) to 

@@ -23,10 +23,10 @@ jobs:
           name: Download dependencies
           command: |
             git clone -b master git://github.com/stackstorm-exchange/ci.git ~/ci
-            ~/ci/.circle/dependencies ; ~/ci/.circle/exit_on_py2_checks $?
+            ~/ci/.circle/dependencies || ~/ci/.circle/exit_on_py2_checks $?
       - run:
           name: Run tests (Python 2.7)
-          command: ~/ci/.circle/test ; ~/ci/.circle/exit_on_py2_checks $?
+          command: ~/ci/.circle/test || ~/ci/.circle/exit_on_py2_checks $?
       - save_cache:
           key: v1-dependency-cache-py27-{{ checksum "requirements.txt" }}
           paths:
